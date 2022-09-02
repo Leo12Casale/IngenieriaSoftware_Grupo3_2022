@@ -42,7 +42,7 @@ export default function Layout({ children }) {
             <div class="dropdown dropdown-end">
               <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                 <div class="w-10 rounded-full">
-                  <img src="https://placeimg.com/80/80/people" />
+                  <img src="https://placeimg.com/80/80/people" alt="avatar" />
                 </div>
               </label>
               <ul
@@ -64,7 +64,7 @@ export default function Layout({ children }) {
         </div>
       </header>
 
-      <main className="flex-auto flex justify-center items-center">
+      <main className="flex-auto flex flex-col justify-center items-center bg-slate-600">
         {children}
       </main>
       <footer class="footer footer-center p-4 bg-base-300 text-base-content">
