@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+import { paqueteType } from "../types/index.js";
 
-export default function Layout({ children }) {
+export default function Layout({ children, carrito }) {
   return (
     <div className="flex flex-col h-screen">
       <header>
@@ -77,8 +78,10 @@ export default function Layout({ children }) {
 }
 Layout.propTypes = {
   children: PropTypes.node,
+  carrito: PropTypes.arrayOf(paqueteType),
 };
 
 Layout.defaultProps = {
   children: null,
+  carrito: [],
 };
