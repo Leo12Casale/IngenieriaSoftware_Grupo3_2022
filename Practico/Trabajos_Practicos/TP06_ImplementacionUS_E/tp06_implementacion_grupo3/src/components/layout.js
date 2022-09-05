@@ -1,57 +1,84 @@
 import PropTypes from "prop-types";
-import { paqueteType } from "../types/index.js";
+import { paqueteType } from "../types/index";
+import CartIcon from "../svg/cart";
+import CloseIcon from "../svg/close";
+
+function Item({ paquete }) {
+  return (
+    <div className="flex space-x-2 justify-center items-center">
+      <img
+        className="w-10 h-10 rounded-full hidden sm:inline"
+        src={paquete.imgUrl}
+      />
+      <div className="flex flex-col w-5/12">
+        <p className="truncate font-semibold">{paquete.title}</p>
+        <p className="truncate pl-1">{paquete.description}</p>
+      </div>
+      <div className="w-full flex flex-col text-right">
+        <p>x{paquete.quantity}</p>
+        <p>Total: ${paquete.quantity * paquete.amount}</p>
+      </div>
+      <div className="pl-3 w-10 h-10 overflow-hidden flex justify-center items-center -mr-3 text-white hover:text-fuchsia-300 transition-colors select-none">
+        x
+      </div>
+    </div>
+  );
+}
+
+Item.prototype = {
+  paquete: paqueteType.isRequired,
+};
 
 export default function Layout({ children, carrito }) {
+  const cantidad = carrito.length;
+  const total = carrito.reduce(
+    (prev, curr) => curr.amount * curr.quantity + prev,
+    0
+  );
   return (
     <div className="flex flex-col h-screen">
       <header>
-        <div class="navbar bg-base-100 shadow-md">
-          <div class="flex-1">
-            <a class="normal-case text-xl">DeliverEat!</a>
+        <div className="navbar bg-mangoTango-500 text-white">
+          <div className="flex-1">
+            <a className="normal-case text-xl font-semibold">DeliverEat!</a>
           </div>
-          <div class="flex-none">
-            <div class="dropdown dropdown-end">
-              <label tabindex="0" class="btn btn-ghost btn-circle">
-                <div class="indicator">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span class="badge badge-sm indicator-item">8</span>
+          <div className="flex-none">
+            <div className="dropdown dropdown-end">
+              <label tabindex="0" className="btn btn-ghost btn-circle">
+                <div className="indicator">
+                  <CartIcon />
+                  <span className="badge badge-sm indicator-item">
+                    {cantidad}
+                  </span>
                 </div>
               </label>
               <div
                 tabindex="0"
-                class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+                className="mt-3 card card-compact dropdown-content sm:w-96 bg-base-100 shadow"
               >
-                <div class="card-body">
-                  <span class="font-bold text-lg">8 Items</span>
-                  <span class="text-info">Subtotal: $999</span>
+                <div className="card-body">
+                  <span className="font-bold text-lg">{cantidad} Items</span>
+                  <div className="space-y-2">
+                    {carrito.map((paquete, i) => (
+                      <Item paquete={paquete} key={i} />
+                    ))}
+                  </div>
+                  <span className="text-info">Subtotal: ${total}</span>
                 </div>
               </div>
             </div>
-            <div class="dropdown dropdown-end">
-              <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-                <div class="w-10 rounded-full">
+            <div className="dropdown dropdown-end">
+              <label tabindex="0" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
                   <img src="https://placeimg.com/80/80/people" alt="avatar" />
                 </div>
               </label>
               <ul
                 tabindex="0"
-                class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <a class="justify-between">Profile</a>
+                  <a className="justify-between">Profile</a>
                 </li>
                 <li>
                   <a>Settings</a>
@@ -65,10 +92,10 @@ export default function Layout({ children, carrito }) {
         </div>
       </header>
 
-      <main className="flex-auto flex flex-col justify-center items-center bg-slate-600">
+      <main className="flex-auto flex flex-col justify-center items-center bg-mangoTango-100 text-black">
         {children}
       </main>
-      <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+      <footer className="footer footer-center p-4 bg-mangoTango-500 text-white">
         <div>
           <p>Copyright © 2022 - All right reserved by DeliverEat!</p>
         </div>
