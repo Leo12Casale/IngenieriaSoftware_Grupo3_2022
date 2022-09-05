@@ -4,7 +4,7 @@ import { paqueteType } from "../types/index.js";
 
 function Paquete({ paquete }) {
   return (
-    <div className="card card-side bg-coffee-500 shadow-xl text-white">
+    <div className="card card-side bg-coffee-500 shadow-xl bg-opacity-70 text-white">
       <div className="sm:flex w-full">
         <div className="sm:shrink-0">
           <img
@@ -21,7 +21,7 @@ function Paquete({ paquete }) {
               x{paquete.quantity}
             </div>
             <span className="grow"></span>
-            <div className="bg-mangoTango-500 stat text-white rounded-md w-fit">
+            <div className="bg-mangoTango-400 stat bg-opacity-40 text-white rounded-md w-fit">
               ${paquete.amount} c/u
             </div>
           </div>
@@ -100,10 +100,10 @@ export default function Order() {
           <Paquete paquete={paquete} key={`idx-${idx}`} />
         ))}
         <div className="sticky bottom-0 left-0 right-0 font-medium text-xl text-neutral-focus flex flex-col sm:flex-row items-end justify-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0 p-4">
-          <div className="bg-neutral-content p-3 rounded-md shadow-xl bg-opacity-70 w-fit">
+          <div className="bg-brown p-3 rounded-md shadow-xl text-white w-fit">
             <p>Monto final: ${monto}</p>
           </div>
-          <button className="btn bg-accent text-white p-3 rounded-md shadow-xl border-0 w-fit">
+          <button className="btn bg-mangoTango-500 text-white p-3 rounded-md shadow-xl border-0 w-fit">
             Comprar
           </button>
         </div>

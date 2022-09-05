@@ -47,23 +47,23 @@ export default function Layout({ children, carrito }) {
               <label tabindex="0" className="btn btn-ghost btn-circle">
                 <div className="indicator">
                   <CartIcon />
-                  <span className="badge badge-sm indicator-item">
+                  <span className="badge text-white badge-sm indicator-item">
                     {cantidad}
                   </span>
                 </div>
               </label>
               <div
                 tabindex="0"
-                className="mt-3 card card-compact dropdown-content sm:w-96 bg-base-100 shadow"
+                className="mt-3 bg-coffee-500 bg-opacity-70 card card-compact dropdown-content sm:w-96 shadow"
               >
                 <div className="card-body">
-                  <span className="font-bold text-lg">{cantidad} Items</span>
+                  <span className="font-bold text-lg ">{cantidad} Items</span>
                   <div className="space-y-2">
                     {carrito.map((paquete, i) => (
                       <Item paquete={paquete} key={i} />
                     ))}
                   </div>
-                  <span className="text-info">Subtotal: ${total}</span>
+                  <span className="text-white">Subtotal: ${total}</span>
                 </div>
               </div>
             </div>

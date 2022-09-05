@@ -5,6 +5,7 @@ import Layout from "./components/layout";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Order from "./routes/order";
+import Direction from "./routes/direction";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,6 +21,9 @@ root.render(
           }
         />
         <Route path="/order" element={<Order />} />
+        <Route path="/deliver-direction" element={<Direction />} />
+        <Route path="/resume" element={<Order />} />
+        <Route path="/payment" element={<Order />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
