@@ -1,18 +1,11 @@
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import PropTypes from "prop-types";
 import { paqueteType } from "../types/index.js";
+import mockData from "../utils/mockData";
 
 export default function Direction({ direction }) {
   return (
-    <Layout>
-      <div className="p-2">
-        <ul className="steps">
-          <li className="step step-primary">Register</li>
-          <li className="step step-primary">Choose plan</li>
-          <li className="step">Purchase</li>
-          <li className="step">Receive Product</li>
-        </ul>
-      </div>
+    <Layout carrito={mockData} step={2}>
       <h1 className="text-white font-semibold">Datos de la entrega:</h1>
       <div className="bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row items-end justify-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0 p-4">
         <div className="form-control">

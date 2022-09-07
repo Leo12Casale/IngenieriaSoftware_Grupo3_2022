@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { paqueteType } from "../types/index";
 import CartIcon from "../svg/cart";
 import CloseIcon from "../svg/close";
+import NextButton from "./NextButton";
 
 function Item({ paquete }) {
   return (
@@ -29,7 +30,7 @@ Item.prototype = {
   paquete: paqueteType.isRequired,
 };
 
-export default function Layout({ children, carrito }) {
+export default function Layout({ children, carrito, step }) {
   const cantidad = carrito.length;
   const total = carrito.reduce(
     (prev, curr) => curr.amount * curr.quantity + prev,
@@ -44,7 +45,7 @@ export default function Layout({ children, carrito }) {
           </div>
           <div className="flex-none">
             <div className="dropdown dropdown-end">
-              <label tabindex="0" className="btn btn-ghost btn-circle">
+              <label tabIndex="0" className="btn btn-ghost btn-circle">
                 <div className="indicator">
                   <CartIcon />
                   <span className="badge text-white badge-sm indicator-item">
@@ -53,7 +54,7 @@ export default function Layout({ children, carrito }) {
                 </div>
               </label>
               <div
-                tabindex="0"
+                tabIndex="0"
                 className="mt-3 bg-coffee-500 bg-opacity-70 card card-compact dropdown-content sm:w-96 shadow"
               >
                 <div className="card-body">
@@ -68,13 +69,13 @@ export default function Layout({ children, carrito }) {
               </div>
             </div>
             <div className="dropdown dropdown-end">
-              <label tabindex="0" className="btn btn-ghost btn-circle avatar">
+              <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <img src="https://placeimg.com/80/80/people" alt="avatar" />
                 </div>
               </label>
               <ul
-                tabindex="0"
+                tabIndex="0"
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
@@ -93,7 +94,22 @@ export default function Layout({ children, carrito }) {
       </header>
 
       <main className="flex-auto flex flex-col justify-center items-center bg-mangoTango-100 text-black">
+        <div className="p-2">
+          <ul className="steps">
+            <li className={`step ${step >= 1 ? "step-primary" : ""}`}>
+              Resumen
+            </li>
+            <li className={`step ${step >= 2 ? "step-primary" : ""}`}>Envío</li>
+            <li className={`step ${step >= 3 ? "step-primary" : ""}`}>
+              Forma de pago
+            </li>
+            <li className={`step ${step >= 4 ? "step-primary" : ""}`}>
+              Confirmación
+            </li>
+          </ul>
+        </div>
         {children}
+        <NextButton monto={total} texto="Comprar" />
       </main>
       <footer className="footer footer-center p-4 bg-mangoTango-500 text-white">
         <div>
@@ -106,9 +122,11 @@ export default function Layout({ children, carrito }) {
 Layout.propTypes = {
   children: PropTypes.node,
   carrito: PropTypes.arrayOf(paqueteType),
+  step: PropTypes.number,
 };
 
 Layout.defaultProps = {
   children: null,
   carrito: [],
+  step: 1,
 };
