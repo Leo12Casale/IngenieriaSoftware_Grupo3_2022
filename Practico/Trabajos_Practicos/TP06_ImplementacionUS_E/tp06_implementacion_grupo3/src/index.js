@@ -6,7 +6,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Order from "./routes/order";
 import Direction from "./routes/direction";
-import PayMethod from "./routes/pay-method";
+import PayMethod from "./routes/payment";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
