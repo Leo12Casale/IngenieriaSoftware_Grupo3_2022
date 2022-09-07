@@ -1,5 +1,4 @@
 import Layout from "../components/Layout";
-import NextButton from "../components/NextButton";
 import { paqueteType } from "../types/index.js";
 import mockData from "../utils/mockData";
 
