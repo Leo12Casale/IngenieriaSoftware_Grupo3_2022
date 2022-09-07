@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import NextButton from "../components/NextButton";
 import mockData from "../utils/mockData";
 
