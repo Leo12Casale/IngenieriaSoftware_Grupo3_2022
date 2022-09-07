@@ -93,17 +93,43 @@ export default function Layout({ children, carrito, step }) {
         </div>
       </header>
 
-      <main className="flex-auto flex flex-col justify-center items-center bg-mangoTango-100 text-black">
+      <main className="flex-auto flex flex-col justify-between items-center bg-mangoTango-100 text-black">
         <div className="p-2">
           <ul className="steps">
-            <li className={`step ${step >= 1 ? "step-primary" : ""}`}>
+            <li
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 1
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+              }`}
+            >
               Resumen
             </li>
-            <li className={`step ${step >= 2 ? "step-primary" : ""}`}>Envío</li>
-            <li className={`step ${step >= 3 ? "step-primary" : ""}`}>
+            <li
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 2
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+              }`}
+            >
+              Envío
+            </li>
+            <li
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 3
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+              }`}
+            >
               Forma de pago
             </li>
-            <li className={`step ${step >= 4 ? "step-primary" : ""}`}>
+            <li
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 4
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+              }`}
+            >
               Confirmación
             </li>
           </ul>

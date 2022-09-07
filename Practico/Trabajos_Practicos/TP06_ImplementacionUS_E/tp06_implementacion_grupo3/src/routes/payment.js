@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import Layout from "../components/layout";
-import NextButton from "../components/NextButton";
 import mockData from "../utils/mockData";
 
 function Cash({ totalAmount }) {
@@ -75,7 +74,7 @@ function Card() {
       <div className="form-control">
         <label className="input-group ">
           <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
-            Fecha
+            Fecha de vencimiento
           </span>
           <input type="date" className="input input-bordered  bg-white" />
         </label>
@@ -104,7 +103,7 @@ function RadioButton({ isChecked, update, text }) {
         <input
           type="radio"
           name="radio-method"
-          className="radio bg-mangoTango-100 border-mangoTango-600  checked:bg-coffee-600"
+          className="radio bg-mangoTango-100 border-mangoTango-600 checked:bg-coffee-600 radio-accent"
           checked={isChecked}
           onChange={() => update()}
         />
@@ -121,20 +120,22 @@ export default function PayMethod() {
   );
   return (
     <Layout carrito={mockData} step={3}>
-      {/* Radio buttons */}
       <div>
-        <RadioButton
-          update={() => setIsCash(true)}
-          isChecked={isCash}
-          text={"Efectivo"}
-        />
-        <RadioButton
-          update={() => setIsCash(false)}
-          isChecked={!isCash}
-          text={"Tarjeta de Crédito/Débito"}
-        />
+        {/* Radio buttons */}
+        <div>
+          <RadioButton
+            update={() => setIsCash(true)}
+            isChecked={isCash}
+            text={"Efectivo"}
+          />
+          <RadioButton
+            update={() => setIsCash(false)}
+            isChecked={!isCash}
+            text={"Tarjeta de Crédito/Débito"}
+          />
+        </div>
+        <div>{isCash ? <Cash totalAmount={monto} /> : <Card />}</div>
       </div>
-      <div>{isCash ? <Cash totalAmount={monto} /> : <Card />}</div>
     </Layout>
   );
 }
