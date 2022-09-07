@@ -5,7 +5,7 @@ import Layout from "./components/layout";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Order from "./routes/order";
-import Direction from "./routes/direction";
+import Address from "./routes/address";
 import PayMethod from "./routes/payment";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -22,7 +22,7 @@ root.render(
           }
         />
         <Route path="/order" element={<Order />} />
-        <Route path="/deliver-direction" element={<Direction />} />
+        <Route path="/delivery-address" element={<Address />} />
         <Route path="/resume" element={<Order />} />
         <Route path="/payment" element={<PayMethod />} />
       </Routes>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { paqueteType } from "../types/index.js";
 import mockData from "../utils/mockData";
 
-export default function Direction({ direction }) {
+export default function Address({ address }) {
   return (
     <Layout carrito={mockData} step={2}>
       <div className="flex flex-col items-start space-y-3 ">
