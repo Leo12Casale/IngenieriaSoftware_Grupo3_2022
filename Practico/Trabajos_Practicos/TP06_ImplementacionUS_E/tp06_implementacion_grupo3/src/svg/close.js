@@ -5,8 +5,8 @@ export default function CroseIcon() {
       viewBox="0 0 50 50"
       overflow="visible"
       stroke="black"
-      stroke-width="10"
-      stroke-linecap="round"
+      strokeWidth="10"
+      strokeLinecap="round"
     >
       <line x2="50" y2="50" />
       <line x1="50" y2="50" />
