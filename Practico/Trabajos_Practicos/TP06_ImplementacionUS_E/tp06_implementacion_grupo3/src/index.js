@@ -7,6 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import Order from "./routes/order";
 import Address from "./routes/address";
 import PayMethod from "./routes/payment";
+import Resume from "./routes/resume";
+import NotFound from "./routes/notFound";
 import { Provider } from "react-redux";
 import store from "./app/store";
 
@@ -25,8 +27,9 @@ root.render(
         />
         <Route path="/order" element={<Order />} />
         <Route path="/delivery-address" element={<Address />} />
-        <Route path="/resume" element={<Order />} />
+        <Route path="/resume" element={<Resume />} />
         <Route path="/payment" element={<PayMethod />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   </Provider>
