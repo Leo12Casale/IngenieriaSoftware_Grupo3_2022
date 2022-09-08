@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import { paqueteType } from "../types/index.js";
-import mockData from "../utils/mockData";
+import { useSelector } from "react-redux";
 
 function Paquete({ paquete }) {
   return (
@@ -45,15 +45,12 @@ Paquete.defaultProps = {
 };
 
 export default function Order() {
-  const monto = mockData.reduce(
-    (prev, curr) => curr.amount * curr.quantity + prev,
-    0
-  );
-
+  const cart = useSelector((state) => state.cart.items);
+  console.log(cart);
   return (
-    <Layout carrito={mockData} step={1}>
+    <Layout step={1}>
       <div className="space-y-5 p-10 relative">
-        {mockData.map((paquete, idx) => (
+        {cart.map((paquete, idx) => (
           <Paquete paquete={paquete} key={`idx-${idx}`} />
         ))}
       </div>

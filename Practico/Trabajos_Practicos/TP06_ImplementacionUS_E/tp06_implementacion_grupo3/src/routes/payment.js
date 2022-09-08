@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 import Layout from "../components/Layout";
-import mockData from "../utils/mockData";
 
 function Cash({ totalAmount }) {
   const inputRef = useRef(null);
@@ -114,13 +114,13 @@ function RadioButton({ isChecked, update, text }) {
 
 export default function PayMethod() {
   const [isCash, setIsCash] = useState(true);
-  const monto = mockData.reduce(
-    (prev, curr) => curr.amount * curr.quantity + prev,
-    0
-  );
+  const cart = useSelector((state) => state.cart.items);
+  const monto = useSelector((state) => state.cart.total);
+
   return (
-    <Layout carrito={mockData} step={3}>
+    <Layout step={3}>
       <div>
+        <h2>{cart.length}</h2>
         {/* Radio buttons */}
         <div>
           <RadioButton
@@ -129,7 +129,9 @@ export default function PayMethod() {
             text={"Efectivo"}
           />
           <RadioButton
-            update={() => setIsCash(false)}
+            update={() => {
+              setIsCash(() => false);
+            }}
             isChecked={!isCash}
             text={"Tarjeta de Crédito/Débito"}
           />
