@@ -75,7 +75,7 @@ function Card() {
         </label>
       </div>
       {/* Fecha de vencimiento */}
-      <div className="w-full bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row items-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0">
+      <div className="w-full bottom-0 left-0 right-0  text-neutral-focus flex flex-row sm:items-center space-x-3 ">
         <div className="form-control">
           <label className="input-group ">
             <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
@@ -150,7 +150,6 @@ export default function PayMethod() {
   return (
     <Layout step={3}>
       <div>
-        <h2>{cart.length}</h2>
         {/* Radio buttons */}
         <div>
           <RadioButton

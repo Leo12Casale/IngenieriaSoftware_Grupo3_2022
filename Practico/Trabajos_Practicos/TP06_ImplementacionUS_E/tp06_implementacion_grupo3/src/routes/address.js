@@ -7,7 +7,22 @@ export default function Address({ address }) {
   return (
     <Layout carrito={mockData} step={2}>
       <div className="flex flex-col items-start space-y-3 ">
-        <div className="w-full bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row items-end justify-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0">
+        <div className="form-control">
+          <label className="input-group ">
+            <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
+              Ciudad
+            </span>
+            <select className="select select-bordered bg-white">
+              <option disabled selected>
+                Elige la ciudad
+              </option>
+              <option>Córdoba</option>
+              <option>Villa General Belgrano</option>
+              <option>San Fransisco</option>
+            </select>
+          </label>
+        </div>
+        <div className="w-full bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row justify-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0">
           <div className="form-control">
             <label className="input-group ">
               <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
@@ -25,21 +40,7 @@ export default function Address({ address }) {
             </label>
           </div>
         </div>
-        <div className="form-control">
-          <label className="input-group ">
-            <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
-              Ciudad
-            </span>
-            <select className="select select-bordered bg-white">
-              <option disabled selected>
-                Elige la ciudad
-              </option>
-              <option>Córdoba</option>
-              <option>Villa General Belgrano</option>
-              <option>San Fransisco</option>
-            </select>
-          </label>
-        </div>
+
         <div className="form-control w-full">
           <label className="input-group input-group-vertical">
             <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
@@ -62,7 +63,7 @@ export default function Address({ address }) {
             </select>
           </label>
         </div>
-        <div className="bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row items-end justify-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0">
+        <div className="bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row justify-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0">
           <div className="form-control">
             <label className="input-group ">
               <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
