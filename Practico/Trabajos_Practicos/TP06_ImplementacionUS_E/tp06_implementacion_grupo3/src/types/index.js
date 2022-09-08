@@ -8,7 +8,12 @@ export const paqueteType = PropTypes.shape({
   amount: PropTypes.number,
 });
 
-export const payType = {
+export const deliveryMethodType = {
+  asSoonAsPossible: "As Soon as possible",
+  programmed: "Programmed",
+};
+
+export const payMethodType = {
   cash: "Efectivo",
   card: "Credito/Debito",
 };

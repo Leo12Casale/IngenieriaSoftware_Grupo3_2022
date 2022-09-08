@@ -1,4 +1,4 @@
-import { payType } from "../types";
+import { deliveryMethodType, payMethodType } from "../types";
 import mockData from "../utils/mockData";
 import { TEST, UPDATE_ADDRESS, UPDATE_PAY } from "./actions";
 
@@ -10,19 +10,22 @@ const total = mockData.reduce(
 const initialState = {
   items: mockData,
   total,
-  direccion: {
-    calle: "",
-    numero: 0,
-    ciudad: "",
-    referencia: "",
-    formaEntrega: {},
+  address: {
+    street: "",
+    number: 0,
+    city: "",
+    comments: "",
+    deliveryMethod: deliveryMethodType.asSoonAsPossible,
   },
-  pago: {
-    forma: "",
-    monto: 0,
-    nroTarjeta: 0,
-    nombreApellido: "",
-    fechaVencimiento: "",
+  payment: {
+    payMethod: payMethodType.cash,
+    amount: 0,
+    cardNumber: 0,
+    cardOwner: "",
+    expirationDate: {
+      month: 0,
+      year: 0,
+    },
     cvc: 0,
   },
 };
@@ -31,19 +34,19 @@ const initialState = {
 export default function cartReducer(state = { ...initialState }, action) {
   switch (action.type) {
     case UPDATE_PAY:
-      const pago = {};
-      if (payType.cash) {
-        pago.forma = payType.cash;
-        pago.monto =
-          action.payload.monto >= state.total ? action.payload.monto : 0;
+      const payment = {};
+      if (payMethodType.cash) {
+        payment.payMethod = payMethodType.cash;
+        payment.amount =
+          action.payload.amount >= state.total ? action.payload.amount : 0;
       } else {
-        pago.forma = payType.card;
-        pago.nroTarjeta = action.payload.nroTarjeta;
-        pago.nombreApellido = action.payload.nombreApellido;
-        pago.fechaVencimiento = action.payload.fechaVencimiento;
-        pago.cvc = action.payload.cvc;
+        payment.payMethod = payMethodType.card;
+        payment.cardNumber = action.payload.cardNumber;
+        payment.cardOwner = action.payload.cardOwner;
+        payment.expirationDate = action.payload.expirationDate;
+        payment.cvc = action.payload.cvc;
       }
-      return { pago: { ...pago }, ...state };
+      return { payment: { ...payment }, ...state };
     case UPDATE_ADDRESS:
       return { value: state.value - 1 };
     case TEST:
