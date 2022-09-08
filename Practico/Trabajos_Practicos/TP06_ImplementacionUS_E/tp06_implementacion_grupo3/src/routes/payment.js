@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import Layout from "../components/layout";
-import mockData from "../utils/mockData";
+import { useSelector } from "react-redux";
 
 function Cash({ totalAmount }) {
   const inputRef = useRef(null);
@@ -49,8 +49,8 @@ function Cash({ totalAmount }) {
 
 function Card() {
   var currentYear = new Date().getFullYear();
-  var months = Array.from({length: 12}, (_, i) => i + 1);
-  var years = Array.from({length: 29}, (_, i) => i + currentYear);
+  var months = Array.from({ length: 12 }, (_, i) => i + 1);
+  var years = Array.from({ length: 29 }, (_, i) => i + currentYear);
 
   return (
     <div className="space-y-5">
@@ -82,8 +82,13 @@ function Card() {
               Mes
             </span>
             <select className="select select-bordered bg-white">
-            <option disabled selected></option>
-              { months.map(el => <option value={el} key={el}> {el} </option>) }
+              <option disabled selected></option>
+              {months.map((el) => (
+                <option value={el} key={el}>
+                  {" "}
+                  {el}{" "}
+                </option>
+              ))}
             </select>
           </label>
         </div>
@@ -94,7 +99,12 @@ function Card() {
             </span>
             <select className="select select-bordered bg-white">
               <option disabled selected></option>
-              { years.map(el => <option value={el} key={el}> {el} </option>) }
+              {years.map((el) => (
+                <option value={el} key={el}>
+                  {" "}
+                  {el}{" "}
+                </option>
+              ))}
             </select>
           </label>
         </div>
@@ -134,13 +144,13 @@ function RadioButton({ isChecked, update, text }) {
 
 export default function PayMethod() {
   const [isCash, setIsCash] = useState(true);
-  const monto = mockData.reduce(
-    (prev, curr) => curr.amount * curr.quantity + prev,
-    0
-  );
+  const cart = useSelector((state) => state.cart.items);
+  const monto = useSelector((state) => state.cart.total);
+
   return (
-    <Layout carrito={mockData} step={3}>
+    <Layout step={3}>
       <div>
+        <h2>{cart.length}</h2>
         {/* Radio buttons */}
         <div>
           <RadioButton
@@ -149,7 +159,9 @@ export default function PayMethod() {
             text={"Efectivo"}
           />
           <RadioButton
-            update={() => setIsCash(false)}
+            update={() => {
+              setIsCash(() => false);
+            }}
             isChecked={!isCash}
             text={"Tarjeta de Crédito/Débito"}
           />

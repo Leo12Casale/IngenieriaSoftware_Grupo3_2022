@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import { paqueteType } from "../types/index";
 import CartIcon from "../svg/cart";
-import CloseIcon from "../svg/close";
 import NextButton from "./NextButton";
 
 function Item({ paquete }) {
@@ -30,12 +30,10 @@ Item.prototype = {
   paquete: paqueteType.isRequired,
 };
 
-export default function Layout({ children, carrito, step }) {
+export default function Layout({ children, step, link }) {
+  const carrito = useSelector((state) => state.cart.items);
+  const total = useSelector((state) => state.cart.total);
   const cantidad = carrito.length;
-  const total = carrito.reduce(
-    (prev, curr) => curr.amount * curr.quantity + prev,
-    0
-  );
   return (
     <div className="flex flex-col h-screen">
       <header>
@@ -135,7 +133,7 @@ export default function Layout({ children, carrito, step }) {
           </ul>
         </div>
         {children}
-        <NextButton monto={total} texto="Comprar" />
+        <NextButton monto={total} texto="Comprar" link={link} />
       </main>
       <footer className="footer footer-center p-4 bg-mangoTango-500 text-white">
         <div>
@@ -147,12 +145,10 @@ export default function Layout({ children, carrito, step }) {
 }
 Layout.propTypes = {
   children: PropTypes.node,
-  carrito: PropTypes.arrayOf(paqueteType),
   step: PropTypes.number,
 };
 
 Layout.defaultProps = {
   children: null,
-  carrito: [],
   step: 1,
 };

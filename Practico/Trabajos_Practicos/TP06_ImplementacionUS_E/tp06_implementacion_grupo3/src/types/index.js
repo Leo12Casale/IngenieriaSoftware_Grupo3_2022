@@ -7,3 +7,8 @@ export const paqueteType = PropTypes.shape({
   quantity: PropTypes.number,
   amount: PropTypes.number,
 });
+
+export const payType = {
+  cash: "Efectivo",
+  card: "Credito/Debito",
+};
