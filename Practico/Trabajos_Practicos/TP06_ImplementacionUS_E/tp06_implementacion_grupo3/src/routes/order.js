@@ -1,6 +1,7 @@
 import Layout from "../components/layout";
 import { paqueteType } from "../types/index.js";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Paquete({ paquete }) {
   return (
@@ -46,9 +47,15 @@ Paquete.defaultProps = {
 
 export default function Order() {
   const cart = useSelector((state) => state.cart.items);
+  const navigate = useNavigate();
+
+  const sendData = () => {
+    navigate("/delivery-address");
+  };
+
   console.log(cart);
   return (
-    <Layout step={1}>
+    <Layout step={1} redirect={sendData}>
       <div className="space-y-5 p-10 relative">
         {cart.map((paquete, idx) => (
           <Paquete paquete={paquete} key={`idx-${idx}`} />

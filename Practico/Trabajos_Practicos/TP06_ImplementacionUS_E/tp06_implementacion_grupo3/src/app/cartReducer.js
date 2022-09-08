@@ -16,6 +16,8 @@ const initialState = {
     city: "",
     comments: "",
     deliveryMethod: deliveryMethodType.asSoonAsPossible,
+    deliveryDate: new Date(),
+    deliveryHour: new Date().getHours(),
   },
   payment: {
     payMethod: payMethodType.cash,
@@ -48,10 +50,11 @@ export default function cartReducer(state = { ...initialState }, action) {
       }
       return { payment: { ...payment }, ...state };
     case UPDATE_ADDRESS:
-      return { value: state.value - 1 };
+      return { ...state, address: action.payload };
     case TEST:
       return { ...state, items: state.items.slice(0, -1) };
     default:
+      console.log("Prueba");
       return state;
   }
 }

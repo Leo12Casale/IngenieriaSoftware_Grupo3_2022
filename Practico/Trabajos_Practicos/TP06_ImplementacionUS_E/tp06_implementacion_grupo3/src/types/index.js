@@ -9,8 +9,14 @@ export const paqueteType = PropTypes.shape({
 });
 
 export const deliveryMethodType = {
-  asSoonAsPossible: "As Soon as possible",
-  programmed: "Programmed",
+  asSoonAsPossible: "Lo antes posible",
+  programmed: "Entrega programada",
+};
+
+export const cityType = {
+  cordoba: "Córdoba",
+  sanFransisco: "San Fransisco",
+  villaGeneralBelgrano: "Villa General Belgrano",
 };
 
 export const payMethodType = {

@@ -30,7 +30,7 @@ Item.prototype = {
   paquete: paqueteType.isRequired,
 };
 
-export default function Layout({ children, step, link }) {
+export default function Layout({ children, step, nextButtonText, redirect }) {
   const carrito = useSelector((state) => state.cart.items);
   const total = useSelector((state) => state.cart.total);
   const cantidad = carrito.length;
@@ -95,41 +95,45 @@ export default function Layout({ children, step, link }) {
         <div className="p-2">
           <ul className="steps steps-vertical sm:steps-horizontal">
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 1
-                ? "step-primary"
-                : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 1
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+              }`}
             >
               Resumen
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 2
-                ? "step-primary"
-                : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 2
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+              }`}
             >
               Envío
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 3
-                ? "step-primary"
-                : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 3
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+              }`}
             >
               Forma de pago
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 4
-                ? "step-primary"
-                : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 4
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+              }`}
             >
               Confirmación
             </li>
           </ul>
         </div>
         {children}
-        <NextButton monto={total} texto="Comprar" link={link} />
+        <NextButton monto={total} texto={nextButtonText} redirect={redirect} />
       </main>
       <footer className="footer footer-center p-4 bg-mangoTango-500 text-white">
         <div>
@@ -142,9 +146,12 @@ export default function Layout({ children, step, link }) {
 Layout.propTypes = {
   children: PropTypes.node,
   step: PropTypes.number,
+  redirect: PropTypes.func,
+  nextButtonText: PropTypes.string,
 };
 
 Layout.defaultProps = {
   children: null,
   step: 1,
+  nextButtonText: "Siguiente",
 };
