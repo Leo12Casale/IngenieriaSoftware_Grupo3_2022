@@ -48,6 +48,10 @@ function Cash({ totalAmount }) {
 }
 
 function Card() {
+  var currentYear = new Date().getFullYear();
+  var months = Array.from({length: 12}, (_, i) => i + 1);
+  var years = Array.from({length: 29}, (_, i) => i + currentYear);
+
   return (
     <div className="space-y-5">
       {/* Número de la tarjeta */}
@@ -71,13 +75,29 @@ function Card() {
         </label>
       </div>
       {/* Fecha de vencimiento */}
-      <div className="form-control">
-        <label className="input-group ">
-          <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
-            Fecha de vencimiento
-          </span>
-          <input type="date" className="input input-bordered  bg-white" />
-        </label>
+      <div className="w-full bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row items-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0">
+        <div className="form-control">
+          <label className="input-group ">
+            <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
+              Mes
+            </span>
+            <select className="select select-bordered bg-white">
+            <option disabled selected></option>
+              { months.map(el => <option value={el} key={el}> {el} </option>) }
+            </select>
+          </label>
+        </div>
+        <div className="form-control">
+          <label className="input-group">
+            <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
+              Año
+            </span>
+            <select className="select select-bordered bg-white">
+              <option disabled selected></option>
+              { years.map(el => <option value={el} key={el}> {el} </option>) }
+            </select>
+          </label>
+        </div>
       </div>
       {/* CVC */}
       <div>
