@@ -1,9 +1,12 @@
 import Layout from "../components/layout";
 import PropTypes from "prop-types";
-import { paqueteType } from "../types/index.js";
+import { deliveryMethodType, paqueteType } from "../types/index.js";
 import mockData from "../utils/mockData";
+import { useState } from "react";
+
 
 export default function Address({ address }) {
+  const [isASAP, setIsASAP] = useState(true);
   return (
     <Layout carrito={mockData} step={2}>
       <div className="flex flex-col items-start space-y-3 ">
@@ -54,16 +57,23 @@ export default function Address({ address }) {
             <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
               Forma de entrega
             </span>
-            <select className="select select-bordered bg-white">
+            <select onChange={(e) => {
+              if (e.target.value == deliveryMethodType.asSoonAsPossible) {
+                setIsASAP(true)
+              }
+              else {
+                setIsASAP(false)
+              }
+            }} className="select select-bordered bg-white">
               <option disabled selected>
                 Elige la forma de entrega
               </option>
-              <option>Lo antes posible</option>
-              <option>Programar entrega</option>
+              <option value={deliveryMethodType.asSoonAsPossible}>Lo antes posible</option>
+              <option value={deliveryMethodType.programmed}>Programar entrega</option>
             </select>
           </label>
         </div>
-        <div className="bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row justify-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0">
+        {isASAP || <div className="bottom-0 left-0 right-0  text-neutral-focus flex flex-col sm:flex-row justify-end space-y-3 sm:items-center sm:space-x-3 sm:space-y-0">
           <div className="form-control">
             <label className="input-group ">
               <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
@@ -80,7 +90,7 @@ export default function Address({ address }) {
               <input type="time" className="input input-bordered  bg-white" />
             </label>
           </div>
-        </div>
+        </div>}
       </div>
     </Layout>
   );
