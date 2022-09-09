@@ -20,7 +20,7 @@ export default function Address({ address }) {
   const deliveryHourEl = useRef(null);
 
   const sendData = () => {
-    var payload = {
+    let payload = {
       street: streetEl.current.value,
       number: parseInt(numberEl.current.value),
       city: cityEl.current.value,
@@ -30,11 +30,10 @@ export default function Address({ address }) {
     if (!isASAP) {
       payload = {
         ...payload,
-        deliveryDate: Date.parse(deliveryDateEl.current.value),
+        deliveryDate: deliveryDateEl.current.value,
         deliveryHour: deliveryHourEl.current.value,
       };
     }
-    console.log(typeof payload.deliveryHour)
     console.log(payload);
     const action = updateAddress(payload);
     if (action.type === ACTION_ERROR) console.log(action.msj);

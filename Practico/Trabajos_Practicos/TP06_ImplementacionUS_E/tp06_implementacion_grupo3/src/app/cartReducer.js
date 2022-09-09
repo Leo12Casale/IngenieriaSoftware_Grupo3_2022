@@ -36,25 +36,12 @@ const initialState = {
 export default function cartReducer(state = { ...initialState }, action) {
   switch (action.type) {
     case UPDATE_PAY:
-      const payment = {};
-      if (payMethodType.cash) {
-        payment.payMethod = payMethodType.cash;
-        payment.amount =
-          action.payload.amount >= state.total ? action.payload.amount : 0;
-      } else {
-        payment.payMethod = payMethodType.card;
-        payment.cardNumber = action.payload.cardNumber;
-        payment.cardOwner = action.payload.cardOwner;
-        payment.expirationDate = action.payload.expirationDate;
-        payment.cvc = action.payload.cvc;
-      }
-      return { payment: { ...payment }, ...state };
+      return { ...state, payment: { ...action.payload } };
     case UPDATE_ADDRESS:
       return { ...state, address: action.payload };
     case TEST:
       return { ...state, items: state.items.slice(0, -1) };
     default:
-      console.log("Prueba");
       return state;
   }
 }

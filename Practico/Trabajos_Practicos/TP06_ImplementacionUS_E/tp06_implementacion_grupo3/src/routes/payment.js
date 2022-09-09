@@ -41,17 +41,15 @@ export default function PayMethod() {
   const cvcEl = useRef(null);
 
   const sendData = () => {
-    var payload = {};
+    let payload = {};
     if (isCash) {
       payload = {
-        ...payload,
         payMethod: payMethodType.cash,
-        amount: amountEl.current.value,
+        amount: parseInt(amountEl.current.value),
       };
     }
     else {
       payload = {
-        ...payload,
         payMethod: payMethodType.card,
         cardNumber: parseInt(cardNumberEl.current.value),
         cardOwner: cardOwnerEl.current.value,
@@ -62,6 +60,7 @@ export default function PayMethod() {
         cvc: parseInt(cvcEl.current.value),
       };
     }
+
     console.log(payload);
     const action = updatePayAction(payload, totalAmount);
     if (action.type === ACTION_ERROR) console.log(action.msj)
@@ -70,6 +69,9 @@ export default function PayMethod() {
       navigate("/resume");
     }
   };
+
+  const estadoCompra = useSelector((state) => state);
+  console.log(estadoCompra);
 
 
   return (

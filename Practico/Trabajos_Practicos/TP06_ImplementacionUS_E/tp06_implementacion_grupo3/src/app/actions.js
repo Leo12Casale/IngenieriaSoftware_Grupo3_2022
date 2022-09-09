@@ -23,7 +23,6 @@ export const updatePayAction = (payload, total) => {
       "El monto ingresado debe ser superior al total de la compra"
     );
 
-
   var cc =
     /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|62[0-9]{14})$/;
 
@@ -76,7 +75,7 @@ export const updateAddress = (payload) => {
     return actionError("Debe ingresar una dirección válida.");
   }
 
-  if (payload.number > 10000 || payload.number <= 0) {
+  if (isNaN(payload.number) || (payload.number > 10000 || payload.number <= 0)) {
     return actionError("Debe ingresar una altura válida.");
   }
 
@@ -86,19 +85,20 @@ export const updateAddress = (payload) => {
   ) {
     return actionError("Debe seleccionar un método de entrega.");
   }
-
-  const date = new Date();
-
   if (
     payload.deliveryMethod === deliveryMethodType.programmed &&
-    (payload.deliverDate === undefined ||
-      payload.deliverHour === undefined ||
-      payload.deliverDate < date ||
-      (payload.deliverHour <= date.getHours && payload.deliverDate == date))
-  ) {
-    return actionError("Debe ingresar una fecha de entrega válida.");
+    (payload.deliveryDate === "" ||
+      payload.deliveryHour === "")) {
+    return actionError("Debe ingresar una fecha de entrega");
   }
+  else {
+    const date = new Date();
+    const datePload = new Date(payload.deliveryDate + " " + payload.deliveryHour);
+    if (datePload < date) {
+      return actionError("Debe ingresar una fecha de entrega válida.");
+    }
 
+  }
   return { type: UPDATE_ADDRESS, payload };
 };
 
