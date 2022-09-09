@@ -1,6 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useReducer } from "react";
 import Layout from "../components/layout";
+import { payMethodType } from "../types/index.js";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ACTION_ERROR, updatePayAction } from "../app/actions";
+
 function RadioButton({ isChecked, update, text }) {
   //TODO: borrar el padding del radio button
   return (
@@ -26,10 +31,52 @@ export default function PayMethod() {
   var currentYear = new Date().getFullYear();
   var months = Array.from({ length: 12 }, (_, i) => i + 1);
   var years = Array.from({ length: 29 }, (_, i) => i + currentYear);
-  const inputRef = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const amountEl = useRef(null);
+  const cardNumberEl = useRef(null);
+  const cardOwnerEl = useRef(null);
+  const expirationMonthEl = useRef(null);
+  const expirationYearEl = useRef(null);
+  const cvcEl = useRef(null);
+
+  const sendData = () => {
+    var payload = {};
+    if (isCash) {
+      payload = {
+        ...payload,
+        payMethod: payMethodType.cash,
+        amount: amountEl.current.value,
+      };
+    }
+    else {
+      payload = {
+        ...payload,
+        payMethod: payMethodType.card,
+        cardNumber: parseInt(cardNumberEl.current.value),
+        cardOwner: cardOwnerEl.current.value,
+        expirationDate: {
+          month: expirationMonthEl.current.value,
+          year: expirationYearEl.current.value,
+        },
+        cvc: parseInt(cvcEl.current.value),
+      };
+    }
+    console.log(payload);
+    const action = updatePayAction(payload, totalAmount);
+    if (action.type === ACTION_ERROR) console.log(action.msj)
+    else {
+      dispatch(action);
+      navigate("/resume");
+    }
+  };
+
 
   return (
-    <Layout step={3}>
+    <Layout
+      step={3}
+      redirect={sendData}
+      nextButtonText={"Siguiente"}>
       <div>
         {/* Radio buttons */}
         <div>
@@ -55,12 +102,12 @@ export default function PayMethod() {
                     Monto
                   </span>
                   <input
-                    ref={inputRef}
+                    ref={amountEl}
                     type="number"
                     className="input input-bordered bg-white"
                     onBlur={() => {
                       setValidar(
-                        totalAmount <= parseFloat(inputRef.current.value)
+                        totalAmount <= parseFloat(amountEl.current.value)
                       );
                     }}
                   />
@@ -97,6 +144,7 @@ export default function PayMethod() {
                       Número de tarjeta
                     </span>
                     <input
+                      ref={cardNumberEl}
                       type="number"
                       className="input input-bordered bg-white"
                     />
@@ -110,6 +158,7 @@ export default function PayMethod() {
                     Nombre del titular
                   </span>
                   <input
+                    ref={cardOwnerEl}
                     type="text"
                     className="input input-bordered  bg-white"
                   />
@@ -122,7 +171,7 @@ export default function PayMethod() {
                     <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
                       Mes
                     </span>
-                    <select className="select select-bordered bg-white">
+                    <select ref={expirationMonthEl} className="select select-bordered bg-white">
                       <option disabled selected></option>
                       {months.map((el) => (
                         <option value={el} key={el}>
@@ -138,7 +187,7 @@ export default function PayMethod() {
                     <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
                       Año
                     </span>
-                    <select className="select select-bordered bg-white">
+                    <select ref={expirationYearEl} className="select select-bordered bg-white">
                       <option disabled selected></option>
                       {years.map((el) => (
                         <option value={el} key={el}>
@@ -158,6 +207,7 @@ export default function PayMethod() {
                       CVC
                     </span>
                     <input
+                      ref={cvcEl}
                       type="number"
                       className="input input-bordered bg-white"
                     />

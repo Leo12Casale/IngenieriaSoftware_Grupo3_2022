@@ -15,7 +15,7 @@ export const deliveryMethodType = {
 
 export const cityType = {
   cordoba: "Córdoba",
-  sanFransisco: "San Fransisco",
+  sanFrancisco: "San Francisco",
   villaGeneralBelgrano: "Villa General Belgrano",
 };
 
