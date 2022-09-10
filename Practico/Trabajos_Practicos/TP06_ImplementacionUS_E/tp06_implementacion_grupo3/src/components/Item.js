@@ -8,7 +8,7 @@ export default function Item({ paquete }) {
                 className="w-10 h-10 rounded-full hidden sm:inline"
                 src={paquete.imgUrl}
             />
-            <div className="flex flex-col w-5/12">
+            <div className="flex flex-col w-8/12">
                 <p className="truncate font-semibold">{paquete.title}</p>
                 <p className="truncate pl-1">{paquete.description}</p>
             </div>
@@ -23,17 +23,3 @@ export default function Item({ paquete }) {
 Item.propType = {
     paquete: paqueteType.isRequired,
 };
-
-
-function Card({ card }) {
-    return (
-        <div className="form-control">
-            <label className="input-group ">
-                <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
-                    Tarjeta N°
-                </span>
-                <input type="text" className="input input-bordered disable !bg-white border-hidden" disabled value={card} />
-            </label>
-        </div>
-    )
-}

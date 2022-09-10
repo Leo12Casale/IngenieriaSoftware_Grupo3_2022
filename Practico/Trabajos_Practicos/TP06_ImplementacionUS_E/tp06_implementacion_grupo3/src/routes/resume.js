@@ -49,9 +49,9 @@ export default function Resume({ resume }) {
 
     return (
         <>
-            <Layout step={4} btnText={"Confirmar"} >
+            <Layout step={4} nextButtonText={"Confirmar"} >
                 <div
-                    className="bg-coffee-500 bg-opacity-70 rounded-xl sm:w-96 shadow my-4 text-white"
+                    className="bg-coffee-500 bg-opacity-70 rounded-xl shadow my-4 text-white "
                 >
                     <div className="card-body">
                         <span className="font-bold text-lg">{estadoCompra.cart.items.length} Items</span>
