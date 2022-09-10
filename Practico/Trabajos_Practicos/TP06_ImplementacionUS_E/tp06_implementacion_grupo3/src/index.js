@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./components/layout";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Order from "./routes/order";
@@ -11,20 +10,14 @@ import Resume from "./routes/resume";
 import NotFound from "./routes/notFound";
 import { Provider } from "react-redux";
 import store from "./app/store";
+import Home from "./routes/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <h1>Delivereat!</h1>
-            </Layout>
-          }
-        />
+        <Route path="/" element={<Home />}/>
         <Route path="/order" element={<Order />} />
         <Route path="/delivery-address" element={<Address />} />
         <Route path="/resume" element={<Resume />} />
