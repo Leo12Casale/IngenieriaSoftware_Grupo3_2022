@@ -3,28 +3,8 @@ import { useSelector } from "react-redux";
 import { paqueteType } from "../types/index";
 import CartIcon from "../svg/cart";
 import NextButton from "./NextButton";
+import Item from "./Item";
 
-function Item({ paquete }) {
-  return (
-    <div className="flex space-x-2 justify-center items-center">
-      <img
-        className="w-10 h-10 rounded-full hidden sm:inline"
-        src={paquete.imgUrl}
-      />
-      <div className="flex flex-col w-5/12">
-        <p className="truncate font-semibold">{paquete.title}</p>
-        <p className="truncate pl-1">{paquete.description}</p>
-      </div>
-      <div className="w-full flex flex-col text-right">
-        <p>x{paquete.quantity}</p>
-        <p>Total: ${paquete.quantity * paquete.amount}</p>
-      </div>
-      <div className="pl-3 w-10 h-10 overflow-hidden flex justify-center items-center -mr-3 text-white hover:text-fuchsia-300 transition-colors select-none">
-        x
-      </div>
-    </div>
-  );
-}
 
 Item.prototype = {
   paquete: paqueteType.isRequired,
@@ -95,38 +75,34 @@ export default function Layout({ children, step, nextButtonText, redirect }) {
         <div className="p-2">
           <ul className="steps steps-vertical sm:steps-horizontal">
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                step >= 1
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 1
                   ? "step-primary"
                   : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-              }`}
+                }`}
             >
               Resumen
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                step >= 2
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 2
                   ? "step-primary"
                   : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-              }`}
+                }`}
             >
               Envío
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                step >= 3
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 3
                   ? "step-primary"
                   : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-              }`}
+                }`}
             >
               Forma de pago
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                step >= 4
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 4
                   ? "step-primary"
                   : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-              }`}
+                }`}
             >
               Confirmación
             </li>

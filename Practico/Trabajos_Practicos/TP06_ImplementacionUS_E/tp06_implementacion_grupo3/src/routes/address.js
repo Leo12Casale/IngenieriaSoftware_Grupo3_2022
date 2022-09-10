@@ -103,6 +103,7 @@ export default function Address({ address }) {
             <textarea
               className="textarea input-bordered bg-white"
               ref={commentsEl}
+              maxlength="50"
             />
           </label>
         </div>
