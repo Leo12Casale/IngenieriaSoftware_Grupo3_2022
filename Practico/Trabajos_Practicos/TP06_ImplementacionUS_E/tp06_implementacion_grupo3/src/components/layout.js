@@ -5,7 +5,6 @@ import CartIcon from "../svg/cart";
 import NextButton from "./NextButton";
 import Item from "./Item";
 
-
 Item.prototype = {
   paquete: paqueteType.isRequired,
 };
@@ -33,13 +32,31 @@ export default function Layout({ children, step, nextButtonText, redirect }) {
               </label>
               <div
                 tabIndex="0"
-                className="mt-3 bg-coffee-500 bg-opacity-70 card card-compact dropdown-content sm:w-96 shadow"
+                className="mt-3 bg-coffee-500 bg-opacity-70 p-2 dropdown-content w-60 sm:w-96 shadow rounded-lg"
               >
-                <div className="card-body">
+                <div className="">
                   <span className="font-bold text-lg ">{cantidad} Items</span>
                   <div className="space-y-2">
                     {carrito.map((paquete, i) => (
-                      <Item paquete={paquete} key={i} />
+                      <div
+                        className="flex space-x-2 justify-center items-center"
+                        key={i}
+                      >
+                        <img
+                          className="w-10 h-10 rounded-full hidden sm:inline"
+                          src={paquete.imgUrl}
+                        />
+                        <div className="flex flex-col grow">
+                          <p className="sm:font-semibold">{paquete.title}</p>
+                          <p className="pl-1 hidden sm:inline">
+                            {paquete.description.slice(0, 25)}...
+                          </p>
+                        </div>
+                        <div className="flex-col text-right hidden sm:flex">
+                          <p>x{paquete.quantity}</p>
+                          <p>Total: ${paquete.quantity * paquete.amount}</p>
+                        </div>
+                      </div>
                     ))}
                   </div>
                   <span className="text-white">Subtotal: ${total}</span>
@@ -75,34 +92,38 @@ export default function Layout({ children, step, nextButtonText, redirect }) {
         <div className="p-2">
           <ul className="steps steps-vertical sm:steps-horizontal">
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 1
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 1
                   ? "step-primary"
                   : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+              }`}
             >
               Resumen
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 2
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 2
                   ? "step-primary"
                   : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+              }`}
             >
               Envío
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 3
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 3
                   ? "step-primary"
                   : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+              }`}
             >
               Forma de pago
             </li>
             <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 4
+              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                step >= 4
                   ? "step-primary"
                   : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+              }`}
             >
               Confirmación
             </li>

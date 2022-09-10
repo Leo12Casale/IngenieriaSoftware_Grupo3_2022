@@ -6,9 +6,11 @@ import { useReducer, useRef, useState } from "react";
 import { ACTION_ERROR, updateAddress } from "../app/actions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import InputAlert from "../components/InputAlert";
 
-export default function Address({ address }) {
+export default function Address() {
   const [isASAP, setIsASAP] = useState(true);
+  const [showAlert, setshowAlert] = useState({ show: false, msj: "" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cityEl = useRef(null);
@@ -36,8 +38,11 @@ export default function Address({ address }) {
     }
     console.log(payload);
     const action = updateAddress(payload);
-    if (action.type === ACTION_ERROR) console.log(action.msj);
-    else {
+
+    if (action.type === ACTION_ERROR) {
+      console.log(action.msj);
+      setshowAlert({ show: true, msj: action.msj });
+    } else {
       dispatch(action);
       navigate("/payment");
     }
@@ -166,6 +171,8 @@ export default function Address({ address }) {
           </div>
         )}
       </div>
+
+      <InputAlert action={showAlert} close={setshowAlert} />
     </Layout>
   );
 }

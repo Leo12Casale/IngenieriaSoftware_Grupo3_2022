@@ -13,12 +13,17 @@ export const updatePayAction = (payload, total) => {
   //TODO: validar payload. retornar action o un msj de error
   if (
     payload.payMethod === undefined &&
-    payload.payMethod != payMethodType.cash &&
-    payload.payMethod != payMethodType.card
+    payload.payMethod !== payMethodType.cash &&
+    payload.payMethod !== payMethodType.card
   )
     return actionError("El tipo de pago seleccionado no es correcto");
 
-  if (payload.payMethodType === payMethodType.cash && (payload.amount === undefined || payload.amount < total))
+  if (
+    payload.payMethod === payMethodType.cash &&
+    (payload.amount === undefined || isNaN(payload.amount))
+  )
+    return actionError("Debe ingresar un monto");
+  if (payload.amount < total)
     return actionError(
       "El monto ingresado debe ser superior al total de la compra"
     );
@@ -26,15 +31,11 @@ export const updatePayAction = (payload, total) => {
   var cc =
     /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|62[0-9]{14})$/;
 
-  if (payload.payMethodType == payMethodType.card) {
+  if (payload.payMethod == payMethodType.card) {
     if (payload.cardNumber === undefined || !cc.test(payload.cardNumber))
       return actionError("Tarjeta inválida");
 
-    if (
-      payload.cardOwner === undefined ||
-      payload.cardOwner > 999 ||
-      payload.cardOwner < 100
-    )
+    if (payload.cvc === undefined || payload.cvc > 999 || payload.cvc < 100)
       return actionError("Código de seguridad incorrecto");
 
     if (
@@ -60,9 +61,7 @@ export const updatePayAction = (payload, total) => {
   };
 };
 
-
 export const updateAddress = (payload) => {
-
   if (
     payload.city != cityType.cordoba &&
     payload.city != cityType.sanFrancisco &&
@@ -75,7 +74,7 @@ export const updateAddress = (payload) => {
     return actionError("Debe ingresar una dirección válida.");
   }
 
-  if (isNaN(payload.number) || (payload.number > 10000 || payload.number <= 0)) {
+  if (isNaN(payload.number) || payload.number > 10000 || payload.number <= 0) {
     return actionError("Debe ingresar una altura válida.");
   }
 
@@ -87,17 +86,17 @@ export const updateAddress = (payload) => {
   }
   if (
     payload.deliveryMethod === deliveryMethodType.programmed &&
-    (payload.deliveryDate === "" ||
-      payload.deliveryHour === "")) {
+    (payload.deliveryDate === "" || payload.deliveryHour === "")
+  ) {
     return actionError("Debe ingresar una fecha de entrega");
-  }
-  else {
+  } else {
     const date = new Date();
-    const datePload = new Date(payload.deliveryDate + " " + payload.deliveryHour);
+    const datePload = new Date(
+      payload.deliveryDate + " " + payload.deliveryHour
+    );
     if (datePload < date) {
       return actionError("Debe ingresar una fecha de entrega válida.");
     }
-
   }
   return { type: UPDATE_ADDRESS, payload };
 };

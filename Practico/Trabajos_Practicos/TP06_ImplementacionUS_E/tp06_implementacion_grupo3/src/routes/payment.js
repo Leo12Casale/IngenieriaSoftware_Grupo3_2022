@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ACTION_ERROR, updatePayAction } from "../app/actions";
+import InputAlert from "../components/InputAlert";
 
 function RadioButton({ isChecked, update, text }) {
   //TODO: borrar el padding del radio button
@@ -26,7 +27,7 @@ function RadioButton({ isChecked, update, text }) {
 
 export default function PayMethod() {
   const [isCash, setIsCash] = useState(true);
-  const [esValido, setValidar] = useState(true);
+  const [showAlert, setshowAlert] = useState({ show: false, msj: "" });
   const totalAmount = useSelector((state) => state.cart.total);
   var currentYear = new Date().getFullYear();
   var months = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -47,8 +48,7 @@ export default function PayMethod() {
         payMethod: payMethodType.cash,
         amount: parseInt(amountEl.current.value),
       };
-    }
-    else {
+    } else {
       payload = {
         payMethod: payMethodType.card,
         cardNumber: parseInt(cardNumberEl.current.value),
@@ -63,8 +63,10 @@ export default function PayMethod() {
 
     console.log(payload);
     const action = updatePayAction(payload, totalAmount);
-    if (action.type === ACTION_ERROR) console.log(action.msj)
-    else {
+    console.log("la action: ", action);
+    if (action.type === ACTION_ERROR) {
+      setshowAlert({ show: true, msj: action.msj });
+    } else {
       dispatch(action);
       navigate("/resume");
     }
@@ -73,12 +75,8 @@ export default function PayMethod() {
   const estadoCompra = useSelector((state) => state);
   console.log(estadoCompra);
 
-
   return (
-    <Layout
-      step={3}
-      redirect={sendData}
-      nextButtonText={"Siguiente"}>
+    <Layout step={3} redirect={sendData} nextButtonText={"Siguiente"}>
       <div>
         {/* Radio buttons */}
         <div>
@@ -107,34 +105,9 @@ export default function PayMethod() {
                     ref={amountEl}
                     type="number"
                     className="input input-bordered bg-white"
-                    onBlur={() => {
-                      setValidar(
-                        totalAmount <= parseFloat(amountEl.current.value)
-                      );
-                    }}
                   />
                 </label>
               </div>
-              {!esValido && (
-                <div className="alert alert-warning shadow-lg">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="stroke-current flex-shrink-0 h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                      />
-                    </svg>
-                    <span>El monto debe ser superior a ${totalAmount}</span>
-                  </div>
-                </div>
-              )}
             </div>
           ) : (
             <div className="space-y-5">
@@ -149,6 +122,7 @@ export default function PayMethod() {
                       ref={cardNumberEl}
                       type="number"
                       className="input input-bordered bg-white"
+                      maxLength={16}
                     />
                   </label>
                 </div>
@@ -173,8 +147,11 @@ export default function PayMethod() {
                     <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
                       Mes
                     </span>
-                    <select ref={expirationMonthEl} className="select select-bordered bg-white">
-                      <option disabled selected></option>
+                    <select
+                      ref={expirationMonthEl}
+                      className="select select-bordered bg-white"
+                    >
+                      <option disabled></option>
                       {months.map((el) => (
                         <option value={el} key={el}>
                           {" "}
@@ -189,8 +166,11 @@ export default function PayMethod() {
                     <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
                       Año
                     </span>
-                    <select ref={expirationYearEl} className="select select-bordered bg-white">
-                      <option disabled selected></option>
+                    <select
+                      ref={expirationYearEl}
+                      className="select select-bordered bg-white"
+                    >
+                      <option disabled></option>
                       {years.map((el) => (
                         <option value={el} key={el}>
                           {" "}
@@ -220,6 +200,8 @@ export default function PayMethod() {
           )}
         </div>
       </div>
+
+      <InputAlert action={showAlert} close={setshowAlert} />
     </Layout>
   );
 }
