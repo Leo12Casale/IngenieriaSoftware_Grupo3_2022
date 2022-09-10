@@ -4,7 +4,6 @@ import Layout from '../components/layout';
 
 export default function Home() {
     const navigate = useNavigate();
-    
     return (
         <Layout 
             totalInical={true} 
