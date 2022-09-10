@@ -55,7 +55,10 @@ export default function Order() {
 
   console.log(cart);
   return (
-    <Layout step={1} redirect={sendData}>
+    <Layout  
+      step={1}
+      redirect={sendData}
+      nextButtonText={"Realizar Pedido"}>
       <div className="space-y-5 p-10 relative">
         {cart.map((paquete, idx) => (
           <Paquete paquete={paquete} key={`idx-${idx}`} />
