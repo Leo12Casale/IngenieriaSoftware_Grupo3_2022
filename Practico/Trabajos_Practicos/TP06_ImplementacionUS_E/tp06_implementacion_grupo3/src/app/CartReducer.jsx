@@ -1,6 +1,6 @@
 import { deliveryMethodType, payMethodType } from "../types";
-import mockData from "../utils/mockData";
-import { TEST, UPDATE_ADDRESS, UPDATE_PAY } from "./actions";
+import mockData from "../utils/MockData";
+import { TEST, UPDATE_ADDRESS, UPDATE_PAY } from "./Actions";
 
 const total = mockData.reduce(
   (prev, curr) => curr.amount * curr.quantity + prev,
@@ -33,7 +33,7 @@ const initialState = {
 };
 
 // Reducer
-export default function cartReducer(state = { ...initialState }, action) {
+export default function CartReducer(state = { ...initialState }, action) {
   switch (action.type) {
     case UPDATE_PAY:
       return { ...state, payment: { ...action.payload } };

@@ -1,9 +1,8 @@
-import Layout from "../components/layout";
-import PropTypes from "prop-types";
-import { cityType, deliveryMethodType, paqueteType } from "../types/index.js";
-import mockData from "../utils/mockData";
-import { useReducer, useRef, useState } from "react";
-import { ACTION_ERROR, updateAddress } from "../app/actions";
+import Layout from "../components/Layout";
+import { cityType, deliveryMethodType } from "../types/index.js";
+import mockData from "../utils/MockData";
+import { useRef, useState } from "react";
+import { ACTION_ERROR, updateAddress } from "../app/Actions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import InputAlert from "../components/InputAlert";
