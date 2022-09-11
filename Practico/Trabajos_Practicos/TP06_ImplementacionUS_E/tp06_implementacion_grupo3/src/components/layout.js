@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { paqueteType } from "../types/index";
-import CartIcon from "../svg/CartIcon";
+import CartIcon from "../svg/cart";
 import NextButton from "./NextButton";
 import Item from "./Item";
 

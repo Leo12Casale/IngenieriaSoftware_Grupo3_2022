@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import { paqueteType } from "../types/index.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

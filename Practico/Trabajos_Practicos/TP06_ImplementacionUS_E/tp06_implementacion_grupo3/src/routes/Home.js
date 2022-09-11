@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
 
 export default function Home() {
     const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import { useState, useRef, useReducer } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import { payMethodType } from "../types/index.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ACTION_ERROR, updatePayAction } from "../app/Actions";
+import { ACTION_ERROR, updatePayAction } from "../app/actions";
 import InputAlert from "../components/InputAlert";
 
 function RadioButton({ isChecked, update, text }) {

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import { deliveryMethodType, payMethodType } from "../types";
 import Item from "../components/Item";
 
