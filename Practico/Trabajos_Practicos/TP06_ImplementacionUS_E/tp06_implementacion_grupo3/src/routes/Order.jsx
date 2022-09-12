@@ -58,8 +58,16 @@ export default function Order() {
     <Layout step={1} redirect={sendData} nextButtonText={"Realizar Pedido"}>
       {cart === undefined || cart.length === 0 ? (
         <div className="card card-side bg-coffee-500 w-fit shadow-xl bg-opacity-70 text-white">
-          <div className="card-body p-4 grow text-2xl font-bold">
-            <button onClick={() => navigate("/")}>CARRITO VACÍO!</button>
+          <div className="card-body p-4 grow text-2xl">
+            <h1>Carrito vacío</h1>
+            <div className="flex justify-center sm:justify-end">
+              <button
+                className="btn bg-mangoTango-500 text-white p-3 rounded-md shadow-sm border-0 h-fit"
+                onClick={() => navigate("/")}
+              >
+                Volver
+              </button>
+            </div>
           </div>
         </div>
       ) : (
