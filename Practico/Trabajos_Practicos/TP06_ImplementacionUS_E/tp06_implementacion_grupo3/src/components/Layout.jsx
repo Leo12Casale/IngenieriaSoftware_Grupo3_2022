@@ -4,6 +4,7 @@ import { paqueteType } from "../types/index";
 import CartIcon from "../svg/Cart";
 import NextButton from "./NextButton";
 import Item from "./Item";
+import { useLocation } from "react-router-dom";
 
 Item.prototype = {
   paquete: paqueteType.isRequired,
@@ -12,7 +13,7 @@ Item.prototype = {
 export default function Layout({ children, step, nextButtonText, redirect }) {
   let carrito = useSelector((state) => state.cart.items);
   let total = useSelector((state) => state.cart.total);
-
+  const { pathname } = useLocation();
   const cantidad = carrito.length;
   return (
     <div className="flex flex-col h-screen">
@@ -90,46 +91,48 @@ export default function Layout({ children, step, nextButtonText, redirect }) {
       </header>
 
       <main className="flex-auto flex flex-col justify-between items-center bg-mangoTango-100 text-black p-1">
-        <div className="p-2">
-          <ul className="steps steps-vertical sm:steps-horizontal">
-            <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                step >= 1
-                  ? "step-primary"
-                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-              }`}
-            >
-              Resumen
-            </li>
-            <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                step >= 2
-                  ? "step-primary"
-                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-              }`}
-            >
-              Envío
-            </li>
-            <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                step >= 3
-                  ? "step-primary"
-                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-              }`}
-            >
-              Forma de pago
-            </li>
-            <li
-              className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                step >= 4
-                  ? "step-primary"
-                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-              }`}
-            >
-              Confirmación
-            </li>
-          </ul>
-        </div>
+        {pathname === "/" || (
+          <div className="p-2">
+            <ul className="steps steps-vertical sm:steps-horizontal">
+              <li
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                  step >= 1
+                    ? "step-primary"
+                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                }`}
+              >
+                Resumen
+              </li>
+              <li
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                  step >= 2
+                    ? "step-primary"
+                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                }`}
+              >
+                Envío
+              </li>
+              <li
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                  step >= 3
+                    ? "step-primary"
+                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                }`}
+              >
+                Forma de pago
+              </li>
+              <li
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                  step >= 4
+                    ? "step-primary"
+                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                }`}
+              >
+                Confirmación
+              </li>
+            </ul>
+          </div>
+        )}
         {children}
         <NextButton monto={total} texto={nextButtonText} redirect={redirect} />
       </main>
