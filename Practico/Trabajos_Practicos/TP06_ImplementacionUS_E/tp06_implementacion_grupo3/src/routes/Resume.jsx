@@ -144,7 +144,7 @@ export default function Resume() {
                 disabled
                 value={
                   payment === payMethodType.cash
-                    ? payment
+                    ? `$${payment}`
                     : `Tarjeta ${cardType}`
                 }
               />
