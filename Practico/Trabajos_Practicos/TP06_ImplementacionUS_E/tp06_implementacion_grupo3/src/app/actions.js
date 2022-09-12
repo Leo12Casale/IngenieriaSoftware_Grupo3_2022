@@ -65,9 +65,11 @@ export const updatePayAction = (payload, total) => {
     const year = new Date().getFullYear();
 
     if (
-      payload.expirationDate.year < year ||
-      (payload.expirationDate.month < month &&
-        payload.expirationDate.year === year)
+      payload.expirationDate.year === undefined ||
+      payload.expirationDate.month === undefined ||
+      parseInt(payload.expirationDate.year) < year ||
+      (parseInt(payload.expirationDate.month) < month &&
+        parseInt(payload.expirationDate.year) === year)
     )
       return actionError("Debe ingresar una fecha de vencimiento válida");
   }
