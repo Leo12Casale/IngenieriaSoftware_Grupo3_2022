@@ -5,7 +5,7 @@ import CartIcon from "../svg/Cart";
 import NextButton from "./NextButton";
 import Item from "./Item";
 import { useLocation } from "react-router-dom";
-import person from "../images/person.jpg";;
+import person from "../images/person.jpg";
 
 Item.prototype = {
   paquete: paqueteType.isRequired,
@@ -21,7 +21,9 @@ export default function Layout({ children, step, nextButtonText, redirect }) {
       <header>
         <div className="navbar bg-mangoTango-500 text-white">
           <div className="flex-1">
-            <a className="normal-case text-xl font-semibold">DeliverEat!</a>
+            <span className="normal-case text-xl font-semibold">
+              DeliverEat!
+            </span>
           </div>
           <div className="flex-none">
             <div className="dropdown dropdown-end">
@@ -82,34 +84,38 @@ export default function Layout({ children, step, nextButtonText, redirect }) {
           <div className="p-2">
             <ul className="steps steps-vertical sm:steps-horizontal">
               <li
-                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 1
-                  ? "step-primary"
-                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                  }`}
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                  step >= 1
+                    ? "step-primary"
+                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                }`}
               >
                 Resumen
               </li>
               <li
-                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 2
-                  ? "step-primary"
-                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                  }`}
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                  step >= 2
+                    ? "step-primary"
+                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                }`}
               >
                 Envío
               </li>
               <li
-                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 3
-                  ? "step-primary"
-                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                  }`}
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                  step >= 3
+                    ? "step-primary"
+                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                }`}
               >
                 Forma de pago
               </li>
               <li
-                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 4
-                  ? "step-primary"
-                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                  }`}
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
+                  step >= 4
+                    ? "step-primary"
+                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                }`}
               >
                 Confirmación
               </li>

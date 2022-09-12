@@ -45,7 +45,7 @@ function Card({ cardNumber }) {
           type="text"
           className="input input-bordered disable !bg-white border-hidden"
           disabled
-          value={"**** **** **** " + `${String(cardNumber).substring(11, 15)}`}
+          value={`**** **** **** ${String(cardNumber).substring(11, 15)}`}
         />
       </label>
     </div>
@@ -67,8 +67,8 @@ export default function Resume() {
     purchaseState.cart.address.street + " " + purchaseState.cart.address.number;
   const date = new Date(
     purchaseState.cart.address.deliveryDate +
-    " " +
-    purchaseState.cart.address.deliveryHour
+      " " +
+      purchaseState.cart.address.deliveryHour
   ).toLocaleString("es-AR");
   let dateHour;
   if (
@@ -181,7 +181,7 @@ export default function Resume() {
             className={`alert ${
               // isConfirmed ? "alert-success" : "alert-info"
               isConfirmed ? "bg-coffee-500 text-white" : "alert-info"
-              } shadow-lg  w-fit flex-col z-20`}
+            } shadow-lg  w-fit flex-col z-20`}
           >
             <div>
               <svg

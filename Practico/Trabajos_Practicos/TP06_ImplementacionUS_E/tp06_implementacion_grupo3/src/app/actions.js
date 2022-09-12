@@ -1,5 +1,4 @@
 import { cityType, deliveryMethodType, payMethodType } from "../types";
-import mockData from "../utils/mockData";
 
 export const UPDATE_PAY = "UPDATE_PAY";
 export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
@@ -43,14 +42,16 @@ export const updatePayAction = (payload, total) => {
     /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|62[0-9]{14})$/;
 
   let cvc = /^[0-9]+$/;
-  if (payload.payMethod == payMethodType.card) {
+  if (payload.payMethod === payMethodType.card) {
     if (payload.cardNumber === undefined || !cc.test(payload.cardNumber))
       return actionError("Tarjeta inválida");
 
     if (payload.cardOwner === "")
-      return actionError("Debe ingresar el nombre del titular que figura en la tarjeta.");
+      return actionError(
+        "Debe ingresar el nombre del titular que figura en la tarjeta."
+      );
 
-    if (!cvc.test(payload.cvc) || String(payload.cvc).length != 3)
+    if (!cvc.test(payload.cvc) || String(payload.cvc).length !== 3)
       return actionError("Código de seguridad incorrecto");
 
     if (
@@ -66,7 +67,7 @@ export const updatePayAction = (payload, total) => {
     if (
       payload.expirationDate.year < year ||
       (payload.expirationDate.month < month &&
-        payload.expirationDate.year == year)
+        payload.expirationDate.year === year)
     )
       return actionError("Debe ingresar una fecha de vencimiento válida");
   }
@@ -78,14 +79,14 @@ export const updatePayAction = (payload, total) => {
 
 export const updateAddress = (payload) => {
   if (
-    payload.city != cityType.cordoba &&
-    payload.city != cityType.sanFrancisco &&
-    payload.city != cityType.villaGeneralBelgrano
+    payload.city !== cityType.cordoba &&
+    payload.city !== cityType.sanFrancisco &&
+    payload.city !== cityType.villaGeneralBelgrano
   ) {
     return actionError("Debe seleccionar una ciudad.");
   }
 
-  if (payload.street == "") {
+  if (payload.street === "") {
     return actionError("Debe ingresar una dirección válida.");
   }
 
@@ -94,8 +95,8 @@ export const updateAddress = (payload) => {
   }
 
   if (
-    payload.deliveryMethod != deliveryMethodType.asSoonAsPossible &&
-    payload.deliveryMethod != deliveryMethodType.programmed
+    payload.deliveryMethod !== deliveryMethodType.asSoonAsPossible &&
+    payload.deliveryMethod !== deliveryMethodType.programmed
   ) {
     return actionError("Debe seleccionar un método de entrega.");
   }

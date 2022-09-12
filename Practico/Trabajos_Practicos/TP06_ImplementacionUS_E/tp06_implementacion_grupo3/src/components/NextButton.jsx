@@ -25,5 +25,5 @@ NextButton.propTypes = {
 NextButton.defaultProps = {
   monto: 0,
   texto: "",
-  redirect: () => { },
+  redirect: () => {},
 };
