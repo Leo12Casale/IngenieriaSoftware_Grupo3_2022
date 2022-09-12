@@ -6,13 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ACTION_ERROR, updatePayAction } from "../app/actions";
 import InputAlert from "../components/InputAlert";
+import InputNumber from "../components/InputNumber";
 
 function RadioButton({ isChecked, update, text }) {
   //TODO: borrar el padding del radio button
   return (
-    <div className="form-control">
+    <div className="form-control p-1">
       <label className="label cursor-pointer space-x-2">
-        <span className="label-text text-black">{text}</span>
+        <span className="label-text text-white">{text}</span>
         <input
           type="radio"
           name="radio-method"
@@ -57,7 +58,7 @@ export default function PayMethod() {
           month: expirationMonthEl.current.value,
           year: expirationYearEl.current.value,
         },
-        cvc: parseInt(cvcEl.current.value),
+        cvc: cvcEl.current.value,
       };
     }
 
@@ -79,7 +80,7 @@ export default function PayMethod() {
     <Layout step={3} redirect={sendData} nextButtonText={"Siguiente"}>
       <div>
         {/* Radio buttons */}
-        <div>
+        <div className="bg-coffee-500 bg-opacity-70 font-semibold rounded-xl my-2">
           <RadioButton
             update={() => setIsCash(true)}
             isChecked={isCash}
@@ -101,11 +102,7 @@ export default function PayMethod() {
                   <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
                     Monto
                   </span>
-                  <input
-                    ref={amountEl}
-                    type="number"
-                    className="input input-bordered bg-white"
-                  />
+                  <InputNumber refEl={amountEl} maxLength={7} />
                 </label>
               </div>
             </div>
@@ -118,12 +115,7 @@ export default function PayMethod() {
                     <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
                       Número de tarjeta
                     </span>
-                    <input
-                      type="number"
-                      maxLength="16"
-                      ref={cardNumberEl}
-                      className="input input-bordered bg-white"
-                    />
+                    <InputNumber refEl={cardNumberEl} maxLength={16} />
                   </label>
                 </div>
               </div>
@@ -188,11 +180,7 @@ export default function PayMethod() {
                     <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
                       CVC
                     </span>
-                    <input
-                      ref={cvcEl}
-                      type="number"
-                      className="input input-bordered bg-white"
-                    />
+                    <InputNumber refEl={cvcEl} maxLength={3} />
                   </label>
                 </div>
               </div>
