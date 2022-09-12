@@ -1,12 +1,23 @@
 import { cityType, deliveryMethodType, payMethodType } from "../types";
+import mockData from "../utils/mockData";
 
 export const UPDATE_PAY = "UPDATE_PAY";
 export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
 export const ACTION_ERROR = "ACTION_ERROR";
+export const EMPTY_CART = "EMPTY_CART";
+export const LOAD_CART = "LOAD_CART";
 export const TEST = "TEST";
 
 const actionError = (text) => {
   return { type: ACTION_ERROR, msj: text };
+};
+
+export const emptyCartAction = () => {
+  return { type: EMPTY_CART };
+};
+
+export const loadCartAction = () => {
+  return { type: LOAD_CART };
 };
 
 export const updatePayAction = (payload, total) => {

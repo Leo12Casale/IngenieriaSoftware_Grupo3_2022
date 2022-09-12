@@ -1,6 +1,12 @@
 import { deliveryMethodType, payMethodType } from "../types";
 import mockData from "../utils/mockData";
-import { TEST, UPDATE_ADDRESS, UPDATE_PAY } from "./actions";
+import {
+  EMPTY_CART,
+  LOAD_CART,
+  TEST,
+  UPDATE_ADDRESS,
+  UPDATE_PAY,
+} from "./actions";
 
 const total = mockData.reduce(
   (prev, curr) => curr.amount * curr.quantity + prev,
@@ -39,6 +45,14 @@ export default function cartReducer(state = { ...initialState }, action) {
       return { ...state, payment: { ...action.payload } };
     case UPDATE_ADDRESS:
       return { ...state, address: action.payload };
+    case EMPTY_CART:
+      return { ...state, items: [] };
+    case LOAD_CART:
+      let total = mockData.reduce(
+        (prev, curr) => curr.amount * curr.quantity + prev,
+        0
+      );
+      return { ...state, items: [...mockData], total };
     case TEST:
       return { ...state, items: state.items.slice(0, -1) };
     default:

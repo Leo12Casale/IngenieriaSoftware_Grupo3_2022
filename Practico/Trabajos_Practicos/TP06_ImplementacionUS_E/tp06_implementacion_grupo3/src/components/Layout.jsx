@@ -9,19 +9,10 @@ Item.prototype = {
   paquete: paqueteType.isRequired,
 };
 
-export default function Layout({
-  children,
-  step,
-  nextButtonText,
-  redirect,
-  totalInical = false,
-}) {
+export default function Layout({ children, step, nextButtonText, redirect }) {
   let carrito = useSelector((state) => state.cart.items);
   let total = useSelector((state) => state.cart.total);
-  if (totalInical) {
-    total = 0;
-    carrito = [];
-  }
+
   const cantidad = carrito.length;
   return (
     <div className="flex flex-col h-screen">

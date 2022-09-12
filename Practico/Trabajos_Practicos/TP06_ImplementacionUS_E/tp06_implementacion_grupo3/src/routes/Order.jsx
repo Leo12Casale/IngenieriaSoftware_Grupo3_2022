@@ -56,11 +56,19 @@ export default function Order() {
   console.log(cart);
   return (
     <Layout step={1} redirect={sendData} nextButtonText={"Realizar Pedido"}>
-      <div className="space-y-5 p-10 relative">
-        {cart.map((paquete, idx) => (
-          <Paquete paquete={paquete} key={`idx-${idx}`} />
-        ))}
-      </div>
+      {cart === undefined || cart.length === 0 ? (
+        <div className="card card-side bg-coffee-500 w-fit shadow-xl bg-opacity-70 text-white">
+          <div className="card-body p-4 grow text-2xl font-bold">
+            <button onClick={() => navigate("/")}>CARRITO VACÍO!</button>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-5 p-10 relative">
+          {cart.map((paquete, idx) => (
+            <Paquete paquete={paquete} key={`idx-${idx}`} />
+          ))}
+        </div>
+      )}
     </Layout>
   );
 }
