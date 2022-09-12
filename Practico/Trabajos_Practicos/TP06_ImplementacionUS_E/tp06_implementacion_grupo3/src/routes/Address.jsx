@@ -7,6 +7,7 @@ import { ACTION_ERROR, updateAddress } from "../app/actions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import InputAlert from "../components/InputAlert";
+import InputNumber from "../components/InputNumber";
 
 export default function Address() {
   const [isASAP, setIsASAP] = useState(true);
@@ -40,7 +41,6 @@ export default function Address() {
     const action = updateAddress(payload);
 
     if (action.type === ACTION_ERROR) {
-      console.log(action.msg);
       setshowAlert({ show: true, msg: action.msg });
     } else {
       dispatch(action);
@@ -91,11 +91,7 @@ export default function Address() {
               <span className=" bg-coffee-500 bg-opacity-70 text-white font-semibold">
                 Número
               </span>
-              <input
-                type="number"
-                className="input input-bordered bg-white "
-                ref={numberEl}
-              />
+              <InputNumber refEl={numberEl} maxLength={5} />
             </label>
           </div>
         </div>
