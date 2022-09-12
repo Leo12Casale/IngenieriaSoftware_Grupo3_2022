@@ -39,14 +39,18 @@ export const updatePayAction = (payload, total) => {
       "El monto ingresado debe ser superior al total de la compra"
     );
 
-  var cc =
+  let cc =
     /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|62[0-9]{14})$/;
 
+  let cvc = /^[0-9]+$/;
   if (payload.payMethod == payMethodType.card) {
     if (payload.cardNumber === undefined || !cc.test(payload.cardNumber))
       return actionError("Tarjeta inválida");
 
-    if (payload.cvc === undefined || payload.cvc > 999 || payload.cvc < 100)
+    if (payload.cardOwner === "")
+      return actionError("Debe ingresar el nombre del titular que figura en la tarjeta.");
+
+    if (!cvc.test(payload.cvc) || String(payload.cvc).length != 3)
       return actionError("Código de seguridad incorrecto");
 
     if (

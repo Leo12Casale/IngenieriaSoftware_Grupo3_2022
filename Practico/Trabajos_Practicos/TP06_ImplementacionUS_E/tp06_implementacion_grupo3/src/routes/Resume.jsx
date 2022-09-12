@@ -18,7 +18,7 @@ function Cash({ amount }) {
           type="text"
           className="input input-bordered disable !bg-white border-hidden"
           disabled
-          value={amount}
+          value={"$" + amount}
         />
       </label>
     </div>
@@ -50,8 +50,8 @@ export default function Resume() {
     purchaseState.cart.address.street + " " + purchaseState.cart.address.number;
   const date = new Date(
     purchaseState.cart.address.deliveryDate +
-      " " +
-      purchaseState.cart.address.deliveryHour
+    " " +
+    purchaseState.cart.address.deliveryHour
   ).toLocaleString("es-AR");
   let dateHour;
   if (
@@ -73,6 +73,7 @@ export default function Resume() {
   const payment = purchaseState.cart.payment.payMethod;
   const amount = purchaseState.cart.payment.amount;
   const card = purchaseState.cart.payment.cardNumber;
+  console.log(card);
 
   let cardType = "MasterCard";
   if (card !== undefined && card.toString().startsWith(4)) cardType = "Visa";
@@ -163,7 +164,7 @@ export default function Resume() {
             className={`alert ${
               // isConfirmed ? "alert-success" : "alert-info"
               isConfirmed ? "bg-coffee-500 text-white" : "alert-info"
-            } shadow-lg  w-fit flex-col z-20`}
+              } shadow-lg  w-fit flex-col z-20`}
           >
             <div>
               <svg

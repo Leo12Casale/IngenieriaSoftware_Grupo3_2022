@@ -119,10 +119,10 @@ export default function PayMethod() {
                       Número de tarjeta
                     </span>
                     <input
-                      ref={cardNumberEl}
                       type="number"
+                      maxLength="16"
+                      ref={cardNumberEl}
                       className="input input-bordered bg-white"
-                      maxLength={16}
                     />
                   </label>
                 </div>
