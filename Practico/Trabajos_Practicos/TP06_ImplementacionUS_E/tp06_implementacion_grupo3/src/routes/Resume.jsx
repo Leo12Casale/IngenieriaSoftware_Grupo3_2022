@@ -1,8 +1,8 @@
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import Layout from "../components/Layout";
 import { deliveryMethodType, payMethodType } from "../types";
 import Item from "../components/Item";
-import ConfirmationMsg from "../components/ConfirmationMsg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -25,6 +25,14 @@ function Cash({ amount }) {
   );
 }
 
+Cash.propTypes = {
+  amount: PropTypes.number,
+};
+
+Cash.defaultProps = {
+  amount: 0,
+};
+
 function Card({ cardNumber }) {
   console.log(cardNumber);
   return (
@@ -43,6 +51,14 @@ function Card({ cardNumber }) {
     </div>
   );
 }
+
+Card.propTypes = {
+  cardNumber: PropTypes.number,
+};
+
+Card.defaultProps = {
+  cardNumber: 0,
+};
 
 export default function Resume() {
   const purchaseState = useSelector((state) => state);

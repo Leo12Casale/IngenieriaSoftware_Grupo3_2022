@@ -1,8 +1,7 @@
 import Layout from "../components/Layout";
-import PropTypes from "prop-types";
-import { cityType, deliveryMethodType, paqueteType } from "../types/index.js";
+import { cityType, deliveryMethodType } from "../types/index.js";
 import mockData from "../utils/mockData";
-import { useReducer, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ACTION_ERROR, updateAddress } from "../app/actions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";

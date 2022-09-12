@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState, useRef } from "react";
 import Layout from "../components/Layout";
 import { payMethodType } from "../types/index.js";
@@ -25,6 +26,18 @@ function RadioButton({ isChecked, update, text }) {
     </div>
   );
 }
+
+RadioButton.propTypes = {
+  isChecked: PropTypes.bool,
+  update: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+};
+
+RadioButton.defaultProps = {
+  isChecked: false,
+  update: () => { },
+  text: "",
+};
 
 export default function PayMethod() {
   const [isCash, setIsCash] = useState(true);
