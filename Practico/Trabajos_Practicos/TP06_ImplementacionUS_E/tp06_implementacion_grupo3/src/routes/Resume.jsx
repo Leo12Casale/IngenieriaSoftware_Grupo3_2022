@@ -26,6 +26,7 @@ function Cash({ amount }) {
 }
 
 function Card({ cardNumber }) {
+  console.log(cardNumber);
   return (
     <div className="form-control">
       <label className="input-group ">
@@ -36,7 +37,7 @@ function Card({ cardNumber }) {
           type="text"
           className="input input-bordered disable !bg-white border-hidden"
           disabled
-          value={cardNumber}
+          value={"**** **** **** " + `${String(cardNumber).substring(11, 15)}`}
         />
       </label>
     </div>
@@ -144,7 +145,7 @@ export default function Resume() {
                 disabled
                 value={
                   payment === payMethodType.cash
-                    ? `$${payment}`
+                    ? `${payment}`
                     : `Tarjeta ${cardType}`
                 }
               />
@@ -153,7 +154,7 @@ export default function Resume() {
           {payment === payMethodType.cash ? (
             <Cash amount={amount} />
           ) : (
-            <Card card={card} />
+            <Card cardNumber={card} />
           )}
         </div>
       </Layout>
