@@ -27,7 +27,7 @@ function RadioButton({ isChecked, update, text }) {
 
 export default function PayMethod() {
   const [isCash, setIsCash] = useState(true);
-  const [showAlert, setshowAlert] = useState({ show: false, msj: "" });
+  const [showAlert, setshowAlert] = useState({ show: false, msg: "" });
   const totalAmount = useSelector((state) => state.cart.total);
   var currentYear = new Date().getFullYear();
   var months = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -65,7 +65,7 @@ export default function PayMethod() {
     const action = updatePayAction(payload, totalAmount);
     console.log("la action: ", action);
     if (action.type === ACTION_ERROR) {
-      setshowAlert({ show: true, msj: action.msj });
+      setshowAlert({ show: true, msg: action.msg });
     } else {
       dispatch(action);
       navigate("/resume");

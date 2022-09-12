@@ -10,7 +10,7 @@ import InputAlert from "../components/InputAlert";
 
 export default function Address() {
   const [isASAP, setIsASAP] = useState(true);
-  const [showAlert, setshowAlert] = useState({ show: false, msj: "" });
+  const [showAlert, setshowAlert] = useState({ show: false, msg: "" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cityEl = useRef(null);
@@ -40,8 +40,8 @@ export default function Address() {
     const action = updateAddress(payload);
 
     if (action.type === ACTION_ERROR) {
-      console.log(action.msj);
-      setshowAlert({ show: true, msj: action.msj });
+      console.log(action.msg);
+      setshowAlert({ show: true, msg: action.msg });
     } else {
       dispatch(action);
       navigate("/payment");

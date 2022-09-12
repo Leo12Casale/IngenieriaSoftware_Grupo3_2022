@@ -9,7 +9,7 @@ export const LOAD_CART = "LOAD_CART";
 export const TEST = "TEST";
 
 const actionError = (text) => {
-  return { type: ACTION_ERROR, msj: text };
+  return { type: ACTION_ERROR, msg: text };
 };
 
 export const emptyCartAction = () => {
