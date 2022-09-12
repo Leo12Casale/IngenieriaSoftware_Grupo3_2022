@@ -5,6 +5,7 @@ import CartIcon from "../svg/Cart";
 import NextButton from "./NextButton";
 import Item from "./Item";
 import { useLocation } from "react-router-dom";
+import person from "../images/person.jpg";;
 
 Item.prototype = {
   paquete: paqueteType.isRequired,
@@ -65,26 +66,12 @@ export default function Layout({ children, step, nextButtonText, redirect }) {
                 </div>
               </div>
             </div>
-            <div className="dropdown dropdown-end">
+            <div>
               <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://placeimg.com/80/80/people" alt="avatar" />
+                  <img src={person} alt="avatar" />
                 </div>
               </label>
-              <ul
-                tabIndex="0"
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <a className="justify-between">Profile</a>
-                </li>
-                <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a>Logout</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -95,38 +82,34 @@ export default function Layout({ children, step, nextButtonText, redirect }) {
           <div className="p-2">
             <ul className="steps steps-vertical sm:steps-horizontal">
               <li
-                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                  step >= 1
-                    ? "step-primary"
-                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 1
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                  }`}
               >
                 Resumen
               </li>
               <li
-                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                  step >= 2
-                    ? "step-primary"
-                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 2
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                  }`}
               >
                 Envío
               </li>
               <li
-                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                  step >= 3
-                    ? "step-primary"
-                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 3
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                  }`}
               >
                 Forma de pago
               </li>
               <li
-                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${
-                  step >= 4
-                    ? "step-primary"
-                    : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
-                }`}
+                className={`step before:!bg-mangoTango-500 after:!bg-mangoTango-500 ${step >= 4
+                  ? "step-primary"
+                  : "after:!text-white before:!bg-coffee-500 after:!bg-coffee-500"
+                  }`}
               >
                 Confirmación
               </li>
