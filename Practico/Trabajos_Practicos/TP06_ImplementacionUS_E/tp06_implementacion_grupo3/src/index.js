@@ -3,14 +3,14 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Order from "./routes/order";
-import Address from "./routes/address";
-import PayMethod from "./routes/payment";
-import Resume from "./routes/resume";
-import NotFound from "./routes/notFound";
 import { Provider } from "react-redux";
 import store from "./app/store";
 import Home from "./routes/Home";
+import Order from "./routes/Order";
+import Address from "./routes/Address";
+import Resume from "./routes/Resume";
+import PayMethod from "./routes/Payment";
+import NotFound from "./routes/NotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
