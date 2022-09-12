@@ -50,24 +50,37 @@ export default function Order() {
   const navigate = useNavigate();
 
   const sendData = () => {
-    navigate("/delivery-address");
+    if (cart === undefined || cart.length === 0) navigate("/");
+    else navigate("/delivery-address");
   };
 
   console.log(cart);
   return (
-    <Layout step={1} redirect={sendData} nextButtonText={"Realizar Pedido"}>
+    <Layout
+      step={1}
+      redirect={sendData}
+      nextButtonText={
+        cart === undefined || cart.length === 0 ? "Volver" : "Realizar Pedido"
+      }
+    >
       {cart === undefined || cart.length === 0 ? (
-        <div className="card card-side bg-coffee-500 w-fit shadow-xl bg-opacity-70 text-white">
-          <div className="card-body p-4 grow text-2xl">
-            <h1>Carrito vacío</h1>
-            <div className="flex justify-center sm:justify-end">
-              <button
-                className="btn bg-mangoTango-500 text-white p-3 rounded-md shadow-sm border-0 h-fit"
-                onClick={() => navigate("/")}
-              >
-                Volver
-              </button>
-            </div>
+        <div className="alert alert-error shadow-lg z-10 w-fit">
+          <div>
+            {" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current flex-shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span className="">Carrito Vacío</span>
           </div>
         </div>
       ) : (
