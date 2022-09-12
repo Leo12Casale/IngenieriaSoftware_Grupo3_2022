@@ -1,4 +1,4 @@
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import { paqueteType } from "../types/index.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -55,10 +55,7 @@ export default function Order() {
 
   console.log(cart);
   return (
-    <Layout  
-      step={1}
-      redirect={sendData}
-      nextButtonText={"Realizar Pedido"}>
+    <Layout step={1} redirect={sendData} nextButtonText={"Realizar Pedido"}>
       <div className="space-y-5 p-10 relative">
         {cart.map((paquete, idx) => (
           <Paquete paquete={paquete} key={`idx-${idx}`} />

@@ -1,4 +1,4 @@
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import PropTypes from "prop-types";
 import { cityType, deliveryMethodType, paqueteType } from "../types/index.js";
 import mockData from "../utils/mockData";

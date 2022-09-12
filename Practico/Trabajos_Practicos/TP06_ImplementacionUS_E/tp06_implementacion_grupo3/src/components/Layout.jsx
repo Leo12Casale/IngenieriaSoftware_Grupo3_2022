@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { paqueteType } from "../types/index";
-import CartIcon from "../svg/cart";
+import CartIcon from "../svg/Cart";
 import NextButton from "./NextButton";
 import Item from "./Item";
 
@@ -9,10 +9,19 @@ Item.prototype = {
   paquete: paqueteType.isRequired,
 };
 
-export default function Layout({ children, step, nextButtonText, redirect, totalInical=false}) {
+export default function Layout({
+  children,
+  step,
+  nextButtonText,
+  redirect,
+  totalInical = false,
+}) {
   let carrito = useSelector((state) => state.cart.items);
   let total = useSelector((state) => state.cart.total);
-  if(totalInical) {total=0; carrito=[]};
+  if (totalInical) {
+    total = 0;
+    carrito = [];
+  }
   const cantidad = carrito.length;
   return (
     <div className="flex flex-col h-screen">
